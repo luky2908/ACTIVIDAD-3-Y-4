@@ -1,0 +1,1447 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. Todos los derechos reservados.
+
+Instale la versión más reciente de PowerShell para obtener nuevas características y mejoras. https://aka.ms/PSWindows
+
+PS C:\Users\Usuario>  mongosh --port 27033
+Current Mongosh Log ID: 675b154f88c7582fa5893bf7
+Connecting to:          mongodb://127.0.0.1:27033/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.4
+Using MongoDB:          8.0.4
+Using Mongosh:          2.3.4
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-12-12T08:26:06.875-05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022489, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022489, i: 1 })
+}
+[direct: mongos] test> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('-1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': { '2': "Failed with error 'aborted', from rs1 to rs0" }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 37956,
+        ownedSizeBytes: 3947424,
+        orphanedSizeBytes: 0
+      },
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 304,
+        ownedSizeBytes: 30400,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 10,
+        ownedSizeBytes: 990,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('9070c65a-6424-4671-ab2d-6a934c4749c6'),
+        timestamp: Timestamp({ t: 1734011860, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 }, { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: 100 }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 3, i: 1 }) },
+          { min: { campoShard: 100 }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 3, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022602, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022602, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022603, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022603, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022606, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022606, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022607, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022607, i: 2 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022608, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022608, i: 2 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022609, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022609, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022610, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022610, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022611, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022611, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022612, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022612, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022613, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022613, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022613, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022613, i: 2 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022614, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022614, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022614, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022614, i: 2 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022615, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022615, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022616, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022616, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022616, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022616, i: 2 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022617, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022617, i: 2 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022617, i: 3 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022617, i: 3 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022618, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022618, i: 1 })
+}
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734022619, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734022619, i: 1 })
+}
+[direct: mongos] test> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('-1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': { '2': "Failed with error 'aborted', from rs1 to rs0" }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 304,
+        ownedSizeBytes: 30400,
+        orphanedSizeBytes: 0
+      },
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 37956,
+        ownedSizeBytes: 3947424,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 14,
+        ownedSizeBytes: 1386,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('9070c65a-6424-4671-ab2d-6a934c4749c6'),
+        timestamp: Timestamp({ t: 1734011860, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 }, { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: 100 }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 3, i: 1 }) },
+          { min: { campoShard: 100 }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 3, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] test> db.torneo_actividad.equipos.insert({ campoShard: 101, equipo: 'EquipoA' })
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('675b173a88c7582fa5893bf8') }
+}
+[direct: mongos] test> db.torneo_actividad.equipos.find({ campoShard: 101 })
+[
+  {
+    _id: ObjectId('675b0a8cce298637e389444e'),
+    campoShard: 101,
+    nombreEquipo: 'Equipo 135',
+    jugadores: 19,
+    fechaCreacion: ISODate('2024-12-12T16:08:44.586Z')
+  },
+  {
+    _id: ObjectId('675b0a90ce298637e3894c7a'),
+    campoShard: 101,
+    nombreEquipo: 'Equipo 227',
+    jugadores: 12,
+    fechaCreacion: ISODate('2024-12-12T16:08:48.480Z')
+  },
+  {
+    _id: ObjectId('675b0a94ce298637e38953d2'),
+    campoShard: 101,
+    nombreEquipo: 'Equipo 107',
+    jugadores: 14,
+    fechaCreacion: ISODate('2024-12-12T16:08:52.240Z')
+  },
+  {
+    _id: ObjectId('675b173a88c7582fa5893bf8'),
+    campoShard: 101,
+    equipo: 'EquipoA'
+  }
+]
+[direct: mongos] test> sh.status();
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('-1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': { '2': "Failed with error 'aborted', from rs1 to rs0" }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 304,
+        ownedSizeBytes: 30400,
+        orphanedSizeBytes: 0
+      },
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 37956,
+        ownedSizeBytes: 3947424,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 15,
+        ownedSizeBytes: 1485,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('9070c65a-6424-4671-ab2d-6a934c4749c6'),
+        timestamp: Timestamp({ t: 1734011860, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 }, { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: 100 }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 3, i: 1 }) },
+          { min: { campoShard: 100 }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 3, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] test> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734023391, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734023391, i: 2 })
+}
+[direct: mongos] test> use torneo_actividad;  // Selecciona la base de datos
+switched to db torneo_actividad;
+[direct: mongos] torneo_actividad;> db.equipos.insertOne({ campoShard: 50, nombre: "Equipo A", jugadores: 11, ciudad: "Ciudad X" });  // Inserta undocumento
+{
+  acknowledged: true,
+  insertedId: ObjectId('675b190a88c7582fa5893bf9')
+}
+[direct: mongos] torneo_actividad;> sh.status();  // Muestra el estado del sharding y la distribución de los datos
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently running': 'no',
+  'Currently enabled': 'yes',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': { '2': "Failed with error 'aborted', from rs1 to rs0" }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 37956,
+        ownedSizeBytes: 3947424,
+        orphanedSizeBytes: 0
+      },
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 304,
+        ownedSizeBytes: 30400,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 17,
+        ownedSizeBytes: 1683,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('9070c65a-6424-4671-ab2d-6a934c4749c6'),
+        timestamp: Timestamp({ t: 1734011860, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 }, { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: 100 }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 3, i: 1 }) },
+          { min: { campoShard: 100 }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 3, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'torneo_actividad;',
+      primary: 'rs1',
+      version: {
+        uuid: UUID('7416fb2d-b806-4ccd-a95a-75fde268cbd8'),
+        timestamp: Timestamp({ t: 1734023434, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  }
+]
+[direct: mongos] torneo_actividad;> use "torneo_actividad;";
+MongoshInvalidInputError: [COMMON-10001] Invalid database name: "torneo_actividad;"
+[direct: mongos] torneo_actividad;> db.dropDatabase();
+{ ok: 1, dropped: 'torneo_actividad;' }
+[direct: mongos] torneo_actividad;>
+
+[direct: mongos] torneo_actividad;> show dbs
+admin             112.00 KiB
+config              3.05 MiB
+test                1.52 MiB
+torneo_actividad   13.14 MiB
+[direct: mongos] torneo_actividad;> use torneo_actividad
+switched to db torneo_actividad
+[direct: mongos] torneo_actividad> show colletions
+MongoshInvalidInputError: [COMMON-10001] 'colletions' is not a valid argument for "show".
+[direct: mongos] torneo_actividad> show collections
+equipos
+eventos
+participantes
+resultados
+[direct: mongos] torneo_actividad> use torneo_actividad
+already on db torneo_actividad
+[direct: mongos] torneo_actividad> db.dropDatabase()
+{ ok: 1, dropped: 'torneo_actividad' }
+[direct: mongos] torneo_actividad> use config
+switched to db config
+[direct: mongos] config> db.collections.find({ _id: { $regex: "^torneo_actividad" } })
+
+[direct: mongos] config>
+
+[direct: mongos] config> db.collections.deleteMany({ _id: { $regex: "^torneo_actividad" } })
+{ acknowledged: true, deletedCount: 0 }
+[direct: mongos] config> use torneo_actividad
+switched to db torneo_actividad
+[direct: mongos] torneo_actividad> sh.enableSharding("torneo_actividad")
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734023867, i: 7 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734023867, i: 5 })
+}
+[direct: mongos] torneo_actividad> sh.shardCollection("torneo_actividad.equipos", { campoShard: 1 })
+{
+  collectionsharded: 'torneo_actividad.equipos',
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734023867, i: 43 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734023867, i: 42 })
+}
+[direct: mongos] torneo_actividad> for (let i = 1; i <= 1000; i++) {
+...     db.equipos.insert({ campoShard: i, nombre: "Equipo " + i })
+... }
+
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('675b1ad488c7582fa5893fe1') }
+}
+[direct: mongos] torneo_actividad>
+
+[direct: mongos] torneo_actividad> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': { '2': "Failed with error 'aborted', from rs1 to rs0" }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 1000,
+        ownedSizeBytes: 60000,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 16,
+        ownedSizeBytes: 1584,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs1',
+      version: {
+        uuid: UUID('146fb431-16f3-479f-b002-33ea9428e79c'),
+        timestamp: Timestamp({ t: 1734023867, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: MaxKey() }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] torneo_actividad>
+
+[direct: mongos] torneo_actividad> sh.setBalancerState(true)
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734023911, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734023911, i: 1 })
+}
+[direct: mongos] torneo_actividad> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': { '2': "Failed with error 'aborted', from rs1 to rs0" }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 1000,
+        ownedSizeBytes: 60000,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 15,
+        ownedSizeBytes: 1485,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs1',
+      version: {
+        uuid: UUID('146fb431-16f3-479f-b002-33ea9428e79c'),
+        timestamp: Timestamp({ t: 1734023867, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: MaxKey() }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] torneo_actividad> sh.splitAt("torneo_actividad.equipos", { campoShard: 500 })
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024068, i: 4 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024068, i: 4 })
+}
+[direct: mongos] torneo_actividad> sh.moveChunk("torneo_actividad.equipos", { campoShard: 500 }, "rs0")
+{
+  millis: 361,
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024105, i: 40 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024105, i: 40 })
+}
+[direct: mongos] torneo_actividad> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': {
+    '2': "Failed with error 'aborted', from rs1 to rs0",
+    '3': 'Success'
+  }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 501,
+        numOwnedDocuments: 499,
+        ownedSizeBytes: 29940,
+        orphanedSizeBytes: 30060
+      },
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 501,
+        ownedSizeBytes: 30561,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 15,
+        ownedSizeBytes: 1485,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs1',
+      version: {
+        uuid: UUID('146fb431-16f3-479f-b002-33ea9428e79c'),
+        timestamp: Timestamp({ t: 1734023867, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 }, { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: 500 }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 2, i: 1 }) },
+          { min: { campoShard: 500 }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 2, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] torneo_actividad> sh.startBalancer()
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024597, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024597, i: 1 })
+}
+[direct: mongos] torneo_actividad> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('1')
+  },
+  {
+    _id: 'rs1',
+    host: 'rs1/localhost:27034,localhost:27035,localhost:27036',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734018831, i: 9 }),
+    replSetConfigVersion: Long('121998')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': {
+    '2': "Failed with error 'aborted', from rs1 to rs0",
+    '3': 'Success'
+  }
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 501,
+        ownedSizeBytes: 30561,
+        orphanedSizeBytes: 0
+      },
+      {
+        shardName: 'rs1',
+        numOrphanedDocs: 501,
+        numOwnedDocuments: 499,
+        ownedSizeBytes: 29940,
+        orphanedSizeBytes: 30060
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 15,
+        ownedSizeBytes: 1485,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs1',
+      version: {
+        uuid: UUID('146fb431-16f3-479f-b002-33ea9428e79c'),
+        timestamp: Timestamp({ t: 1734023867, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 }, { shard: 'rs1', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: 500 }, 'on shard': 'rs1', 'last modified': Timestamp({ t: 2, i: 1 }) },
+          { min: { campoShard: 500 }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 2, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] torneo_actividad>

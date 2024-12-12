@@ -1,0 +1,595 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. Todos los derechos reservados.
+
+Instale la versión más reciente de PowerShell para obtener nuevas características y mejoras. https://aka.ms/PSWindows
+
+PS C:\Users\Usuario> mongosh --port 27034
+Current Mongosh Log ID: 675b1c41961774f0fd893bf7
+Connecting to:          mongodb://127.0.0.1:27034/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.4
+Using MongoDB:          8.0.4
+Using Mongosh:          2.3.4
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-12-12T10:42:48.094-05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-12-12T10:42:48.096-05:00: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with--bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavioris desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+------
+
+rs1 [direct: primary] test> rs.status()
+{
+  set: 'rs1',
+  date: ISODate('2024-12-12T17:24:30.603Z'),
+  myState: 1,
+  term: Long('1'),
+  syncSourceHost: '',
+  syncSourceId: -1,
+  heartbeatIntervalMillis: Long('2000'),
+  majorityVoteCount: 2,
+  writeMajorityCount: 2,
+  votingMembersCount: 3,
+  writableVotingMembersCount: 3,
+  optimes: {
+    lastCommittedOpTime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+    lastCommittedWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+    readConcernMajorityOpTime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+    appliedOpTime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+    durableOpTime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+    writtenOpTime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+    lastAppliedWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+    lastDurableWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+    lastWrittenWallTime: ISODate('2024-12-12T17:24:30.012Z')
+  },
+  lastStableRecoveryTimestamp: Timestamp({ t: 1734024239, i: 1 }),
+  electionCandidateMetrics: {
+    lastElectionReason: 'electionTimeout',
+    lastElectionDate: ISODate('2024-12-12T15:46:15.497Z'),
+    electionTerm: Long('1'),
+    lastCommittedOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    lastSeenWrittenOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    lastSeenOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    numVotesNeeded: 2,
+    priorityAtElection: 1,
+    electionTimeoutMillis: Long('10000'),
+    numCatchUpOps: Long('0'),
+    newTermStartDate: ISODate('2024-12-12T15:46:15.583Z'),
+    wMajorityWriteAvailabilityDate: ISODate('2024-12-12T15:46:16.061Z')
+  },
+  members: [
+    {
+      _id: 0,
+      name: 'localhost:27034',
+      health: 1,
+      state: 1,
+      stateStr: 'PRIMARY',
+      uptime: 6108,
+      optime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:24:30.000Z'),
+      optimeWritten: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeWrittenDate: ISODate('2024-12-12T17:24:30.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      electionTime: Timestamp({ t: 1734018375, i: 1 }),
+      electionDate: ISODate('2024-12-12T15:46:15.000Z'),
+      configVersion: 1,
+      configTerm: 1,
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 1,
+      name: 'localhost:27035',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 5906,
+      optime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:24:30.000Z'),
+      optimeDurableDate: ISODate('2024-12-12T17:24:30.000Z'),
+      optimeWrittenDate: ISODate('2024-12-12T17:24:30.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastHeartbeat: ISODate('2024-12-12T17:24:30.518Z'),
+      lastHeartbeatRecv: ISODate('2024-12-12T17:24:29.642Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27034',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 1
+    },
+    {
+      _id: 2,
+      name: 'localhost:27036',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 5906,
+      optime: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1734024270, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:24:30.000Z'),
+      optimeDurableDate: ISODate('2024-12-12T17:24:30.000Z'),
+      optimeWrittenDate: ISODate('2024-12-12T17:24:30.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:24:30.012Z'),
+      lastHeartbeat: ISODate('2024-12-12T17:24:30.519Z'),
+      lastHeartbeatRecv: ISODate('2024-12-12T17:24:30.170Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27034',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 1
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024270, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024270, i: 1 })
+}
+rs1 [direct: primary] test> cfg = rs.conf()
+{
+  _id: 'rs1',
+  version: 1,
+  term: 1,
+  members: [
+    {
+      _id: 0,
+      host: 'localhost:27034',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    },
+    {
+      _id: 1,
+      host: 'localhost:27035',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    },
+    {
+      _id: 2,
+      host: 'localhost:27036',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    }
+  ],
+  protocolVersion: Long('1'),
+  writeConcernMajorityJournalDefault: true,
+  settings: {
+    chainingAllowed: true,
+    heartbeatIntervalMillis: 2000,
+    heartbeatTimeoutSecs: 10,
+    electionTimeoutMillis: 10000,
+    catchUpTimeoutMillis: -1,
+    catchUpTakeoverDelayMillis: 30000,
+    getLastErrorModes: {},
+    getLastErrorDefaults: { w: 1, wtimeout: 0 },
+    replicaSetId: ObjectId('675b053b327c27c0bc5e44d7')
+  }
+}
+rs1 [direct: primary] test> cfg.version = 2  // Cambia la versión para forzar una reconfiguración
+2
+rs1 [direct: primary] test> rs.reconfig(cfg, { force: true })
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024320, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024320, i: 1 })
+}
+rs1 [direct: primary] test> rs.status()
+{
+  set: 'rs1',
+  date: ISODate('2024-12-12T17:25:29.588Z'),
+  myState: 1,
+  term: Long('1'),
+  syncSourceHost: '',
+  syncSourceId: -1,
+  heartbeatIntervalMillis: Long('2000'),
+  majorityVoteCount: 2,
+  writeMajorityCount: 2,
+  votingMembersCount: 3,
+  writableVotingMembersCount: 3,
+  optimes: {
+    lastCommittedOpTime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+    lastCommittedWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+    readConcernMajorityOpTime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+    appliedOpTime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+    durableOpTime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+    writtenOpTime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+    lastAppliedWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+    lastDurableWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+    lastWrittenWallTime: ISODate('2024-12-12T17:25:20.073Z')
+  },
+  lastStableRecoveryTimestamp: Timestamp({ t: 1734024300, i: 1 }),
+  electionCandidateMetrics: {
+    lastElectionReason: 'electionTimeout',
+    lastElectionDate: ISODate('2024-12-12T15:46:15.497Z'),
+    electionTerm: Long('1'),
+    lastCommittedOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    lastSeenWrittenOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    lastSeenOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    numVotesNeeded: 2,
+    priorityAtElection: 1,
+    electionTimeoutMillis: Long('10000'),
+    numCatchUpOps: Long('0'),
+    newTermStartDate: ISODate('2024-12-12T15:46:15.583Z'),
+    wMajorityWriteAvailabilityDate: ISODate('2024-12-12T15:46:16.061Z')
+  },
+  members: [
+    {
+      _id: 0,
+      name: 'localhost:27034',
+      health: 1,
+      state: 1,
+      stateStr: 'PRIMARY',
+      uptime: 6167,
+      optime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:25:20.000Z'),
+      optimeWritten: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeWrittenDate: ISODate('2024-12-12T17:25:20.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      electionTime: Timestamp({ t: 1734018375, i: 1 }),
+      electionDate: ISODate('2024-12-12T15:46:15.000Z'),
+      configVersion: 33647,
+      configTerm: -1,
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 1,
+      name: 'localhost:27035',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 5965,
+      optime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:25:20.000Z'),
+      optimeDurableDate: ISODate('2024-12-12T17:25:20.000Z'),
+      optimeWrittenDate: ISODate('2024-12-12T17:25:20.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastHeartbeat: ISODate('2024-12-12T17:25:27.877Z'),
+      lastHeartbeatRecv: ISODate('2024-12-12T17:25:27.879Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27034',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 33647,
+      configTerm: -1
+    },
+    {
+      _id: 2,
+      name: 'localhost:27036',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 5965,
+      optime: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1734024320, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:25:20.000Z'),
+      optimeDurableDate: ISODate('2024-12-12T17:25:20.000Z'),
+      optimeWrittenDate: ISODate('2024-12-12T17:25:20.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:25:20.073Z'),
+      lastHeartbeat: ISODate('2024-12-12T17:25:27.863Z'),
+      lastHeartbeatRecv: ISODate('2024-12-12T17:25:27.855Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27034',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 33647,
+      configTerm: -1
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024326, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024320, i: 1 })
+}
+rs1 [direct: primary] test> cfg = rs.conf()
+{
+  _id: 'rs1',
+  version: 33647,
+  members: [
+    {
+      _id: 0,
+      host: 'localhost:27034',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    },
+    {
+      _id: 1,
+      host: 'localhost:27035',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    },
+    {
+      _id: 2,
+      host: 'localhost:27036',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    }
+  ],
+  protocolVersion: Long('1'),
+  writeConcernMajorityJournalDefault: true,
+  settings: {
+    chainingAllowed: true,
+    heartbeatIntervalMillis: 2000,
+    heartbeatTimeoutSecs: 10,
+    electionTimeoutMillis: 10000,
+    catchUpTimeoutMillis: -1,
+    catchUpTakeoverDelayMillis: 30000,
+    getLastErrorModes: {},
+    getLastErrorDefaults: { w: 1, wtimeout: 0 },
+    replicaSetId: ObjectId('675b053b327c27c0bc5e44d7')
+  }
+}
+rs1 [direct: primary] test> cfg.version = cfg.version + 1  // Aumenta la versión para forzar la reconfiguración
+33648
+rs1 [direct: primary] test> cfg.members[0].configTerm = 1  // Corrige el valor del configTerm
+1
+rs1 [direct: primary] test> rs.reconfig(cfg, { force: true })
+MongoServerError[InvalidReplicaSetConfig]: member: { _id: 0, host: "localhost:27034", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 1, tags: {}, secondaryDelaySecs: 0, votes: 1, configTerm: 1 } :: caused by :: BSON field 'MemberConfig.configTerm' is an unknown field.
+rs1 [direct: primary] test> cfg = rs.conf()
+{
+  _id: 'rs1',
+  version: 33647,
+  members: [
+    {
+      _id: 0,
+      host: 'localhost:27034',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    },
+    {
+      _id: 1,
+      host: 'localhost:27035',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    },
+    {
+      _id: 2,
+      host: 'localhost:27036',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long('0'),
+      votes: 1
+    }
+  ],
+  protocolVersion: Long('1'),
+  writeConcernMajorityJournalDefault: true,
+  settings: {
+    chainingAllowed: true,
+    heartbeatIntervalMillis: 2000,
+    heartbeatTimeoutSecs: 10,
+    electionTimeoutMillis: 10000,
+    catchUpTimeoutMillis: -1,
+    catchUpTakeoverDelayMillis: 30000,
+    getLastErrorModes: {},
+    getLastErrorDefaults: { w: 1, wtimeout: 0 },
+    replicaSetId: ObjectId('675b053b327c27c0bc5e44d7')
+  }
+}
+rs1 [direct: primary] test> cfg.version = cfg.version + 1  // Aumenta la versión para forzar la reconfiguración
+33648
+rs1 [direct: primary] test> rs.reconfig(cfg, { force: true })
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024514, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024510, i: 1 })
+}
+rs1 [direct: primary] test> rs.status()
+{
+  set: 'rs1',
+  date: ISODate('2024-12-12T17:28:45.200Z'),
+  myState: 1,
+  term: Long('1'),
+  syncSourceHost: '',
+  syncSourceId: -1,
+  heartbeatIntervalMillis: Long('2000'),
+  majorityVoteCount: 2,
+  writeMajorityCount: 2,
+  votingMembersCount: 3,
+  writableVotingMembersCount: 3,
+  optimes: {
+    lastCommittedOpTime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+    lastCommittedWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+    readConcernMajorityOpTime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+    appliedOpTime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+    durableOpTime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+    writtenOpTime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+    lastAppliedWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+    lastDurableWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+    lastWrittenWallTime: ISODate('2024-12-12T17:28:40.209Z')
+  },
+  lastStableRecoveryTimestamp: Timestamp({ t: 1734024480, i: 1 }),
+  electionCandidateMetrics: {
+    lastElectionReason: 'electionTimeout',
+    lastElectionDate: ISODate('2024-12-12T15:46:15.497Z'),
+    electionTerm: Long('1'),
+    lastCommittedOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    lastSeenWrittenOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    lastSeenOpTimeAtElection: { ts: Timestamp({ t: 1734018363, i: 1 }), t: Long('-1') },
+    numVotesNeeded: 2,
+    priorityAtElection: 1,
+    electionTimeoutMillis: Long('10000'),
+    numCatchUpOps: Long('0'),
+    newTermStartDate: ISODate('2024-12-12T15:46:15.583Z'),
+    wMajorityWriteAvailabilityDate: ISODate('2024-12-12T15:46:16.061Z')
+  },
+  members: [
+    {
+      _id: 0,
+      name: 'localhost:27034',
+      health: 1,
+      state: 1,
+      stateStr: 'PRIMARY',
+      uptime: 6363,
+      optime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:28:40.000Z'),
+      optimeWritten: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeWrittenDate: ISODate('2024-12-12T17:28:40.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      electionTime: Timestamp({ t: 1734018375, i: 1 }),
+      electionDate: ISODate('2024-12-12T15:46:15.000Z'),
+      configVersion: 121998,
+      configTerm: -1,
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 1,
+      name: 'localhost:27035',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 6161,
+      optime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:28:40.000Z'),
+      optimeDurableDate: ISODate('2024-12-12T17:28:40.000Z'),
+      optimeWrittenDate: ISODate('2024-12-12T17:28:40.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastHeartbeat: ISODate('2024-12-12T17:28:43.625Z'),
+      lastHeartbeatRecv: ISODate('2024-12-12T17:28:43.623Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27034',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 121998,
+      configTerm: -1
+    },
+    {
+      _id: 2,
+      name: 'localhost:27036',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 6161,
+      optime: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1734024520, i: 1 }), t: Long('1') },
+      optimeDate: ISODate('2024-12-12T17:28:40.000Z'),
+      optimeDurableDate: ISODate('2024-12-12T17:28:40.000Z'),
+      optimeWrittenDate: ISODate('2024-12-12T17:28:40.000Z'),
+      lastAppliedWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastDurableWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastWrittenWallTime: ISODate('2024-12-12T17:28:40.209Z'),
+      lastHeartbeat: ISODate('2024-12-12T17:28:43.639Z'),
+      lastHeartbeatRecv: ISODate('2024-12-12T17:28:43.632Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27034',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 121998,
+      configTerm: -1
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734024524, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734024520, i: 1 })
+}
+rs1 [direct: primary] test>

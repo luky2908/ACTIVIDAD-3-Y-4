@@ -1,0 +1,253 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. Todos los derechos reservados.
+
+Instale la versión más reciente de PowerShell para obtener nuevas características y mejoras. https://aka.ms/PSWindows
+
+PS C:\Users\Usuario> mongosh --port 27033
+Current Mongosh Log ID: 675af567265bbe9090893bf7
+Connecting to:          mongodb://127.0.0.1:27033/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.4
+Using MongoDB:          8.0.4
+Using Mongosh:          2.3.4
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-12-12T08:26:06.875-05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+[direct: mongos] test> sh.status();
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'no',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': 'No recent migrations'
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 38260,
+        ownedSizeBytes: 3979040,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 12,
+        ownedSizeBytes: 1188,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('9070c65a-6424-4671-ab2d-6a934c4749c6'),
+        timestamp: Timestamp({ t: 1734011860, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] test> sh.startBalancer();
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1734014399, i: 3 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1734014399, i: 3 })
+}
+[direct: mongos] test> sh.status()
+shardingVersion
+{ _id: 1, clusterId: ObjectId('675ae0dafc77ff5cf60f1ae7') }
+---
+shards
+[
+  {
+    _id: 'rs0',
+    host: 'rs0/localhost:27030,localhost:27031,localhost:27032',
+    state: 1,
+    topologyTime: Timestamp({ t: 1734011604, i: 11 }),
+    replSetConfigVersion: Long('-1')
+  }
+]
+---
+active mongoses
+[ { '8.0.4': 1 } ]
+---
+autosplit
+{ 'Currently enabled': 'yes' }
+---
+balancer
+{
+  'Currently enabled': 'yes',
+  'Currently running': 'no',
+  'Failed balancer rounds in last 5 attempts': 0,
+  'Migration Results for the last 24 hours': 'No recent migrations'
+}
+---
+shardedDataDistribution
+[
+  {
+    ns: 'torneo_actividad.equipos',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 38260,
+        ownedSizeBytes: 3979040,
+        orphanedSizeBytes: 0
+      }
+    ]
+  },
+  {
+    ns: 'config.system.sessions',
+    shards: [
+      {
+        shardName: 'rs0',
+        numOrphanedDocs: 0,
+        numOwnedDocuments: 15,
+        ownedSizeBytes: 1485,
+        orphanedSizeBytes: 0
+      }
+    ]
+  }
+]
+---
+databases
+[
+  {
+    database: { _id: 'config', primary: 'config', partitioned: true },
+    collections: {
+      'config.system.sessions': {
+        shardKey: { _id: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { _id: MinKey() }, max: { _id: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  },
+  {
+    database: {
+      _id: 'test',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('752e8289-6b7f-4926-b6db-47a0a0db7669'),
+        timestamp: Timestamp({ t: 1734013276, i: 3 }),
+        lastMod: 1
+      }
+    },
+    collections: {}
+  },
+  {
+    database: {
+      _id: 'torneo_actividad',
+      primary: 'rs0',
+      version: {
+        uuid: UUID('9070c65a-6424-4671-ab2d-6a934c4749c6'),
+        timestamp: Timestamp({ t: 1734011860, i: 2 }),
+        lastMod: 1
+      }
+    },
+    collections: {
+      'torneo_actividad.equipos': {
+        shardKey: { campoShard: 1 },
+        unique: false,
+        balancing: true,
+        chunkMetadata: [ { shard: 'rs0', nChunks: 1 } ],
+        chunks: [
+          { min: { campoShard: MinKey() }, max: { campoShard: MaxKey() }, 'on shard': 'rs0', 'last modified': Timestamp({ t: 1, i: 0 }) }
+        ],
+        tags: []
+      }
+    }
+  }
+]
+[direct: mongos] test> sh.moveChunk("torneo_actividad.equipos", { campoShard: 1000 }, "rs1")
+MongoServerError[ShardNotFound]: moveChunk destination shard does not exist
+[direct: mongos] test>
